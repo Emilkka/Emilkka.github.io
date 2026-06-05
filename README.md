@@ -111,21 +111,22 @@
 
         .discount-banner {
             background: var(--discount-bg);
-            border-radius: 20px;
-            padding: 12px 20px;
-            margin: 20px 0;
+            border-radius: 16px;
+            padding: 6px 12px;
+            margin: 15px 0;
             text-align: center;
             color: var(--text-dark);
             font-weight: bold;
-            box-shadow: 0 0 20px rgba(255,170,0,0.3);
+            font-size: 0.85em;
+            box-shadow: 0 0 10px rgba(255,170,0,0.2);
             animation: glow 2s infinite;
         }
         @keyframes glow {
-            0% { box-shadow: 0 0 10px rgba(255,170,0,0.3); }
-            50% { box-shadow: 0 0 25px rgba(255,170,0,0.6); }
-            100% { box-shadow: 0 0 10px rgba(255,170,0,0.3); }
+            0% { box-shadow: 0 0 5px rgba(255,170,0,0.2); }
+            50% { box-shadow: 0 0 12px rgba(255,170,0,0.4); }
+            100% { box-shadow: 0 0 5px rgba(255,170,0,0.2); }
         }
-        .discount-banner span { font-size: 1.3em; }
+        .discount-banner span { font-size: 1.1em; }
 
         .top-contact { text-align: center; margin: 15px 0; }
         .top-vk-link {
@@ -221,7 +222,7 @@
         .service-card { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .service-card.visible { opacity: 1; transform: translateY(0); }
 
-        .guarantee, .reviews, .contact, .security, .daily-tip {
+        .reviews, .contact {
             background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-end));
             border: 1px solid var(--border-color);
             border-radius: 24px;
@@ -229,22 +230,28 @@
             margin: 25px 0;
             text-align: center;
         }
-        .guarantee { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .guarantee-icon { font-size: 2.5em; }
-        .guarantee-text strong { color: #00d4ff; }
 
-        .security-icons { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 15px; }
-        .security-icons span { font-size: 2.2em; filter: grayscale(0.2); transition: 0.2s; }
-        .security-text { color: var(--text-muted); font-size: 0.8em; margin-top: 12px; }
-
-        .daily-tip {
-            background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(124,58,237,0.1));
-            border: 1px dashed #00d4ff;
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
         }
-        .daily-tip .tip-icon { font-size: 1.5em; margin-bottom: 8px; }
-        .daily-tip .tip-text { color: var(--text-main); font-size: 0.9em; font-style: italic; }
+        .info-badge {
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.75em;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .info-badge strong { color: #00d4ff; }
 
-        .reviews h3 { color: var(--text-main); margin-bottom: 15px; }
+        .reviews h3 { color: var(--text-main); margin-bottom: 15px; font-size: 1.2em; }
         .review-card {
             background: rgba(255,255,255,0.05);
             padding: 12px;
@@ -253,12 +260,12 @@
             text-align: left;
         }
         body.light .review-card { background: rgba(0,0,0,0.05); }
-        .review-author { color: #00d4ff; font-weight: bold; }
-        .review-text { color: var(--text-main); font-size: 0.85em; font-style: italic; }
-        .review-stars { color: #ffaa00; font-size: 0.8em; margin-top: 5px; }
+        .review-author { color: #00d4ff; font-weight: bold; font-size: 0.85em; }
+        .review-text { color: var(--text-main); font-size: 0.8em; font-style: italic; }
+        .review-stars { color: #ffaa00; font-size: 0.7em; margin-top: 5px; }
 
         .contact h3 {
-            font-size: 1.4em;
+            font-size: 1.2em;
             margin-bottom: 15px;
             background: linear-gradient(135deg, #00d4ff, #7c3aed);
             -webkit-background-clip: text;
@@ -266,23 +273,24 @@
             color: transparent;
         }
         .contact-item { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
-        .contact-item .label { color: var(--text-muted); font-weight: 500; }
+        .contact-item .label { color: var(--text-muted); font-weight: 500; font-size: 0.85em; }
         .vk-link {
             background: var(--vk-bg);
             color: white;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 0.85em;
         }
         .payment-info {
             background: var(--payment-bg);
             border: 1px dashed #00d4ff;
             border-radius: 40px;
-            padding: 8px 16px;
+            padding: 5px 12px;
             display: inline-block;
             color: #00d4ff;
-            font-size: 0.85em;
+            font-size: 0.75em;
         }
         .footer { text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 0.7em; }
 
@@ -292,45 +300,19 @@
             right: 20px;
             background: linear-gradient(135deg, #00d4ff, #7c3aed);
             color: white;
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8em;
+            font-size: 1.6em;
             text-decoration: none;
             box-shadow: 0 5px 20px rgba(0,212,255,0.4);
             z-index: 999;
             transition: all 0.2s;
         }
         .floating-btn:hover { transform: scale(1.1); }
-
-        /* Всплывающее уведомление */
-        .notification {
-            position: fixed;
-            bottom: 100px;
-            left: 20px;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border-left: 4px solid #00d4ff;
-            border-radius: 16px;
-            padding: 12px 20px;
-            color: #cbd5e1;
-            font-size: 0.85em;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            animation: slideIn 0.5s ease, fadeOut 0.5s ease 4s forwards;
-            pointer-events: none;
-            max-width: 280px;
-        }
-        .notification span { color: #00d4ff; font-weight: bold; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeOut {
-            to { opacity: 0; visibility: hidden; }
-        }
 
         .toast {
             position: fixed;
@@ -344,12 +326,17 @@
             z-index: 1000;
             animation: fadeOut 2s ease forwards;
         }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
 
         @media (max-width: 600px) {
             body { padding: 20px 15px; }
             .logo { font-size: 2.2em; }
             .service-card h3 { font-size: 1em; padding-right: 80px; }
             .counter-number { font-size: 2em; }
+            .footer-info { gap: 10px; }
+            .info-badge { font-size: 0.65em; padding: 4px 12px; }
         }
     </style>
 </head>
@@ -373,8 +360,7 @@
     </div>
 
     <div class="discount-banner">
-        🎁 <span>Скидка 20% на все услуги!</span> 🎁<br>
-        Промокод: <span style="background:#0f172a; padding:2px 10px; border-radius:30px; color:#ffaa00;">PROZVON20</span>
+        🎁 <span>Скидка 20%</span> по промокоду <strong>PROZVON20</strong>
     </div>
 
     <div class="top-contact">
@@ -386,29 +372,6 @@
         <div class="counter-text">✅ Успешно проведённых обзвонов</div>
     </div>
 
-    <div class="guarantee">
-        <div class="guarantee-icon">🛡️</div>
-        <div class="guarantee-text"><strong>Гарантия возврата</strong><br>Не прошёл обзвон – вернём деньги</div>
-    </div>
-
-    <div class="security">
-        <div style="font-size: 1.3em; margin-bottom: 8px;">🔒 Безопасность платежей</div>
-        <div class="security-icons">
-            <span>💳</span> <span>🛡️</span> <span>🔐</span> <span>✅</span>
-        </div>
-        <div class="security-text">
-            Данные защищены. Оплата через надёжные серверы.<br>
-            Никакая информация не передаётся третьим лицам.
-        </div>
-    </div>
-
-    <!-- СЛУЧАЙНЫЙ СОВЕТ ДНЯ -->
-    <div class="daily-tip" id="dailyTip">
-        <div class="tip-icon">💡</div>
-        <div class="tip-text" id="tipText">Загрузка совета...</div>
-    </div>
-
-    <!-- УСЛУГИ -->
     <div class="category"><div class="category-title">▸ АДМИНИСТРАЦИЯ</div></div>
     
     <div class="service-card" data-position="администратора Black Russia" data-price="99">
@@ -524,6 +487,11 @@
         </div>
     </div>
 
+    <div class="footer-info">
+        <div class="info-badge">🛡️ <strong>Гарантия возврата</strong> — если отмените до начала обзвона, вернём полную сумму. После начала обзвона возврат не делаем.</div>
+        <div class="info-badge">🔒 <strong>Безопасность</strong> — данные защищены</div>
+    </div>
+
     <div class="contact">
         <h3>📞 СВЯЗЬ С ProZvon</h3>
         <div class="contact-item">
@@ -534,7 +502,8 @@
             <span class="label">💳 Оплата:</span>
             <div class="payment-info">💳 Банковская карта РФ / Криптовалюта</div>
         </div>
-        <div class="contact-item">✅ Связь в течение 5 минут</div>
+        <!-- ИСПРАВЛЕНА СТРОКА НИЖЕ — цвет стал нейтральным -->
+        <div class="contact-item" style="color: var(--text-muted);">✅ Связь в течение 5 минут</div>
     </div>
 
     <div class="footer">© 2026 ProZvon — Анонимно. Качественно. Быстро.</div>
@@ -543,7 +512,6 @@
 <a href="https://vk.com/im/convo/-239353201?entrypoint=list_all" target="_blank" class="floating-btn">💬</a>
 
 <script>
-    // Зачёркнутая цена (+20%)
     function setOldPrice(priceElementId, oldPriceElementId, realPrice) {
         const oldPrice = Math.ceil(realPrice * 1.2);
         document.getElementById(oldPriceElementId).innerText = oldPrice + " ₽";
@@ -557,8 +525,7 @@
     setOldPrice('price7', 'oldPrice7', 67);
     setOldPrice('price8', 'oldPrice8', 67);
 
-    // Анимация появления
-    const animated = document.querySelectorAll('.service-card, .category, .contact, .reviews, .guarantee, .security, .daily-tip, .online-counter, .discount-banner');
+    const animated = document.querySelectorAll('.service-card, .category, .contact, .reviews, .online-counter, .discount-banner');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -566,7 +533,6 @@
     }, { threshold: 0.1 });
     animated.forEach(el => observer.observe(el));
 
-    // Счётчик заказов
     const counterEl = document.getElementById('orderCounter');
     const target = 147;
     let current = 0;
@@ -581,54 +547,16 @@
         }
     }, 20);
 
-    // ========== СЛУЧАЙНЫЙ СОВЕТ ДНЯ ==========
-    const tips = [
-        "💪 Чаще всего заказывают обзвон на пост Агента поддержки — он самый лёгкий!",
-        "🎯 Если хочешь стать лидером ОПГ — подготовься к вопросам про экономику фракции.",
-        "📝 Администраторов спрашивают про знание правил — учим их с вами.",
-        "⚡ Скидка 20% действует ограниченное время! Не упусти.",
-        "💬 Связь с нами в течение 5 минут после сообщения.",
-        "🛡️ Гарантируем возврат денег, если не пройдёте обзвон.",
-        "🔥 Самый быстрый способ — написать нам прямо сейчас в ВК.",
-        "📊 147 успешных обзвонов — доверяют уже много игроков."
-    ];
-    const randomTip = tips[Math.floor(Math.random() * tips.length)];
-    document.getElementById('tipText').innerText = randomTip;
-
-    // ========== ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ О ЗАКАЗАХ ==========
-    const names = ["Алексей", "Максим", "Дмитрий", "Артём", "Иван", "Екатерина", "Анна", "Сергей", "Владимир", "Ольга"];
-    const services = ["администратора", "агента поддержки", "лидера ОПГ", "технического специалиста", "модератора Discord", "СС ГОСС"];
-    
-    function showRandomOrder() {
-        const randomName = names[Math.floor(Math.random() * names.length)];
-        const randomService = services[Math.floor(Math.random() * services.length)];
-        
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.innerHTML = `📢 <span>${randomName}</span> только что заказал обзвон на пост "${randomService}"!`;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            if (notification && notification.remove) notification.remove();
-        }, 4500);
-    }
-    
-    // Первое уведомление через 5 секунд, затем каждые 18-25 секунд
-    setTimeout(showRandomOrder, 5000);
-    setInterval(showRandomOrder, Math.random() * (25000 - 18000) + 18000);
-
-    // Переключение темы
     const toggleBtn = document.getElementById('themeToggle');
     toggleBtn.addEventListener('click', () => {
         document.body.classList.toggle('light');
         if (document.body.classList.contains('light')) {
-            toggleBtn.innerHTML = '🌞 Тёмная тема';
+            toggleBtn.innerHTML = '🌙 Тёмная тема';
         } else {
-            toggleBtn.innerHTML = '🌙 Светлая тема';
+            toggleBtn.innerHTML = '🌞 Светлая тема';
         }
     });
 
-    // Копирование и переход в чат
     const chatLink = "https://vk.com/im/convo/-239353201?entrypoint=list_all";
     function showToast(msg) {
         let toast = document.createElement('div');
