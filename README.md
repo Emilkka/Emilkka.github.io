@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>ProZvon | Обзвоны для CR:MP & SA:MP</title>
     <style>
-        /* ---------- БАЗОВЫЕ ПЕРЕМЕННЫЕ (темы) ---------- */
         :root {
             --bg-gradient-start: #0a0f1e;
             --bg-gradient-end: #0f172a;
@@ -46,7 +45,6 @@
 
         .container { max-width: 800px; margin: 0 auto; }
 
-        /* Кнопка переключения темы */
         .theme-switch {
             position: fixed;
             top: 20px;
@@ -87,7 +85,6 @@
             padding-top: 12px;
         }
 
-        /* Счётчик онлайн */
         .online-counter {
             background: var(--payment-bg);
             border: 1px solid #00d4ff;
@@ -112,7 +109,6 @@
         }
         .online-text { color: var(--text-main); font-size: 0.85em; }
 
-        /* Баннер скидки */
         .discount-banner {
             background: var(--discount-bg);
             border-radius: 20px;
@@ -122,10 +118,15 @@
             color: var(--text-dark);
             font-weight: bold;
             box-shadow: 0 0 20px rgba(255,170,0,0.3);
+            animation: glow 2s infinite;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(255,170,0,0.3); }
+            50% { box-shadow: 0 0 25px rgba(255,170,0,0.6); }
+            100% { box-shadow: 0 0 10px rgba(255,170,0,0.3); }
         }
         .discount-banner span { font-size: 1.3em; }
 
-        /* Кнопка связи вверху */
         .top-contact { text-align: center; margin: 15px 0; }
         .top-vk-link {
             display: inline-block;
@@ -136,10 +137,15 @@
             text-decoration: none;
             font-weight: bold;
             transition: 0.2s;
+            animation: subtlePulse 2s infinite;
         }
-        .top-vk-link:hover { transform: scale(1.05); }
+        @keyframes subtlePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .top-vk-link:hover { transform: scale(1.05); animation: none; }
 
-        /* Счётчик заказов */
         .counter-block {
             background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-end));
             border: 1px solid var(--border-color);
@@ -152,7 +158,6 @@
         .counter-number { font-size: 2.8em; font-weight: 800; color: #00d4ff; line-height: 1; }
         .counter-text { color: var(--text-muted); font-size: 0.75em; }
 
-        /* Карточки */
         .service-card {
             background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-end));
             border: 1px solid var(--border-color);
@@ -208,7 +213,7 @@
             margin-top: 15px;
             width: 100%;
         }
-        .order-btn:hover { background: #00d4ff; color: #0f172a; }
+        .order-btn:hover { background: #00d4ff; color: #0f172a; transform: scale(0.98); }
 
         .category { margin-top: 30px; margin-bottom: 10px; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
         .category.visible { opacity: 1; transform: translateX(0); }
@@ -216,7 +221,7 @@
         .service-card { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .service-card.visible { opacity: 1; transform: translateY(0); }
 
-        .guarantee, .reviews, .contact, .security {
+        .guarantee, .reviews, .contact, .security, .daily-tip {
             background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-end));
             border: 1px solid var(--border-color);
             border-radius: 24px;
@@ -228,24 +233,16 @@
         .guarantee-icon { font-size: 2.5em; }
         .guarantee-text strong { color: #00d4ff; }
 
-        /* Блок безопасности платежей (фича 5) */
-        .security-icons {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 15px;
+        .security-icons { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 15px; }
+        .security-icons span { font-size: 2.2em; filter: grayscale(0.2); transition: 0.2s; }
+        .security-text { color: var(--text-muted); font-size: 0.8em; margin-top: 12px; }
+
+        .daily-tip {
+            background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(124,58,237,0.1));
+            border: 1px dashed #00d4ff;
         }
-        .security-icons span {
-            font-size: 2.2em;
-            filter: grayscale(0.2);
-            transition: 0.2s;
-        }
-        .security-text {
-            color: var(--text-muted);
-            font-size: 0.8em;
-            margin-top: 12px;
-        }
+        .daily-tip .tip-icon { font-size: 1.5em; margin-bottom: 8px; }
+        .daily-tip .tip-text { color: var(--text-main); font-size: 0.9em; font-style: italic; }
 
         .reviews h3 { color: var(--text-main); margin-bottom: 15px; }
         .review-card {
@@ -305,16 +302,36 @@
             text-decoration: none;
             box-shadow: 0 5px 20px rgba(0,212,255,0.4);
             z-index: 999;
+            transition: all 0.2s;
         }
         .floating-btn:hover { transform: scale(1.1); }
 
-        @media (max-width: 600px) {
-            body { padding: 20px 15px; }
-            .logo { font-size: 2.2em; }
-            .service-card h3 { font-size: 1em; padding-right: 80px; }
-            .counter-number { font-size: 2em; }
+        /* Всплывающее уведомление */
+        .notification {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-left: 4px solid #00d4ff;
+            border-radius: 16px;
+            padding: 12px 20px;
+            color: #cbd5e1;
+            font-size: 0.85em;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease, fadeOut 0.5s ease 4s forwards;
+            pointer-events: none;
+            max-width: 280px;
         }
-        
+        .notification span { color: #00d4ff; font-weight: bold; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
         .toast {
             position: fixed;
             bottom: 90px;
@@ -327,15 +344,16 @@
             z-index: 1000;
             animation: fadeOut 2s ease forwards;
         }
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            70% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
+
+        @media (max-width: 600px) {
+            body { padding: 20px 15px; }
+            .logo { font-size: 2.2em; }
+            .service-card h3 { font-size: 1em; padding-right: 80px; }
+            .counter-number { font-size: 2em; }
         }
     </style>
 </head>
 <body>
-    <!-- Кнопка переключения темы (фича 10) -->
     <div class="theme-switch" id="themeToggle">🌙 Светлая тема</div>
 
 <div class="container">
@@ -373,16 +391,21 @@
         <div class="guarantee-text"><strong>Гарантия возврата</strong><br>Не прошёл обзвон – вернём деньги</div>
     </div>
 
-    <!-- БЛОК БЕЗОПАСНОСТИ ПЛАТЕЖЕЙ (фича 5) -->
     <div class="security">
         <div style="font-size: 1.3em; margin-bottom: 8px;">🔒 Безопасность платежей</div>
         <div class="security-icons">
             <span>💳</span> <span>🛡️</span> <span>🔐</span> <span>✅</span>
         </div>
         <div class="security-text">
-            Данные защищены. Оплата через надёжные серверы. <br>
+            Данные защищены. Оплата через надёжные серверы.<br>
             Никакая информация не передаётся третьим лицам.
         </div>
+    </div>
+
+    <!-- СЛУЧАЙНЫЙ СОВЕТ ДНЯ -->
+    <div class="daily-tip" id="dailyTip">
+        <div class="tip-icon">💡</div>
+        <div class="tip-text" id="tipText">Загрузка совета...</div>
     </div>
 
     <!-- УСЛУГИ -->
@@ -520,7 +543,7 @@
 <a href="https://vk.com/im/convo/-239353201?entrypoint=list_all" target="_blank" class="floating-btn">💬</a>
 
 <script>
-    // Функция для зачёркнутой цены (+20%)
+    // Зачёркнутая цена (+20%)
     function setOldPrice(priceElementId, oldPriceElementId, realPrice) {
         const oldPrice = Math.ceil(realPrice * 1.2);
         document.getElementById(oldPriceElementId).innerText = oldPrice + " ₽";
@@ -535,7 +558,7 @@
     setOldPrice('price8', 'oldPrice8', 67);
 
     // Анимация появления
-    const animated = document.querySelectorAll('.service-card, .category, .contact, .reviews, .guarantee, .security, .online-counter, .discount-banner');
+    const animated = document.querySelectorAll('.service-card, .category, .contact, .reviews, .guarantee, .security, .daily-tip, .online-counter, .discount-banner');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -558,7 +581,43 @@
         }
     }, 20);
 
-    // Переключение темы (фича 10)
+    // ========== СЛУЧАЙНЫЙ СОВЕТ ДНЯ ==========
+    const tips = [
+        "💪 Чаще всего заказывают обзвон на пост Агента поддержки — он самый лёгкий!",
+        "🎯 Если хочешь стать лидером ОПГ — подготовься к вопросам про экономику фракции.",
+        "📝 Администраторов спрашивают про знание правил — учим их с вами.",
+        "⚡ Скидка 20% действует ограниченное время! Не упусти.",
+        "💬 Связь с нами в течение 5 минут после сообщения.",
+        "🛡️ Гарантируем возврат денег, если не пройдёте обзвон.",
+        "🔥 Самый быстрый способ — написать нам прямо сейчас в ВК.",
+        "📊 147 успешных обзвонов — доверяют уже много игроков."
+    ];
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    document.getElementById('tipText').innerText = randomTip;
+
+    // ========== ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ О ЗАКАЗАХ ==========
+    const names = ["Алексей", "Максим", "Дмитрий", "Артём", "Иван", "Екатерина", "Анна", "Сергей", "Владимир", "Ольга"];
+    const services = ["администратора", "агента поддержки", "лидера ОПГ", "технического специалиста", "модератора Discord", "СС ГОСС"];
+    
+    function showRandomOrder() {
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomService = services[Math.floor(Math.random() * services.length)];
+        
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `📢 <span>${randomName}</span> только что заказал обзвон на пост "${randomService}"!`;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification && notification.remove) notification.remove();
+        }, 4500);
+    }
+    
+    // Первое уведомление через 5 секунд, затем каждые 18-25 секунд
+    setTimeout(showRandomOrder, 5000);
+    setInterval(showRandomOrder, Math.random() * (25000 - 18000) + 18000);
+
+    // Переключение темы
     const toggleBtn = document.getElementById('themeToggle');
     toggleBtn.addEventListener('click', () => {
         document.body.classList.toggle('light');
