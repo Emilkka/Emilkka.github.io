@@ -551,9 +551,9 @@
     toggleBtn.addEventListener('click', () => {
         document.body.classList.toggle('light');
         if (document.body.classList.contains('light')) {
-            toggleBtn.innerHTML = '🌙 Тёмная тема';
+            toggleBtn.innerHTML = '🌞 Тёмная тема';
         } else {
-            toggleBtn.innerHTML = '🌞 Светлая тема';
+            toggleBtn.innerHTML = '🌙 Светлая тема';
         }
     });
 
