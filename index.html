@@ -1,20 +1,300 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <title>Мои услуги</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProZvon | Качественные обзвоны для CR:MP & SA:MP</title>
     <style>
-        body { font-family: Arial; margin: 0; padding: 20px; background: #f0f0f0; }
-        h1 { text-align: center; color: #333; }
-        .service { background: white; padding: 15px; margin: 10px 0; border-radius: 10px; }
-        .contact { background: #333; color: white; text-align: center; padding: 15px; margin-top: 20px; border-radius: 10px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0f1e 0%, #0f172a 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            font-size: 0.5em;
+            color: #64748b;
+            display: block;
+        }
+
+        .tagline {
+            color: #94a3b8;
+            margin-top: 10px;
+            font-size: 0.9em;
+            border-top: 1px solid #334155;
+            display: inline-block;
+            padding-top: 12px;
+        }
+
+        .service {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            padding: 20px;
+            margin: 16px 0;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            border-radius: 20px 0 0 20px;
+        }
+
+        .service:hover {
+            transform: translateY(-3px);
+            border-color: #00d4ff;
+            box-shadow: 0 10px 30px -5px rgba(0, 212, 255, 0.2);
+        }
+
+        .service h3 {
+            color: #00d4ff;
+            font-size: 1.25em;
+            margin-bottom: 10px;
+        }
+
+        .service p {
+            color: #cbd5e1;
+            line-height: 1.5;
+            font-size: 0.9em;
+        }
+
+        .price {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            color: white;
+            font-weight: bold;
+            padding: 5px 16px;
+            border-radius: 30px;
+            font-size: 1em;
+            margin-top: 12px;
+        }
+
+        .category {
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .category-title {
+            color: #64748b;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            padding-left: 8px;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 24px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .contact h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-item .label {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .vk-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #2787F5, #1a6bc4);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+            box-shadow: 0 0 15px rgba(39, 135, 245, 0.3);
+        }
+
+        .vk-link:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #3b96f7, #1e7ad4);
+            box-shadow: 0 0 20px rgba(39, 135, 245, 0.5);
+        }
+
+        .payment-info {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px dashed #00d4ff;
+            border-radius: 40px;
+            padding: 10px 20px;
+            display: inline-block;
+            color: #00d4ff;
+            font-size: 0.9em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #475569;
+            font-size: 0.75em;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+            .logo {
+                font-size: 2.2em;
+            }
+            .service h3 {
+                font-size: 1.1em;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Мои услуги</h1>
-    <div class="service"><h3>Название услуги 1</h3><p>Описание услуги 1</p><p>Цена: 1000 ₽</p></div>
-    <div class="service"><h3>Название услуги 2</h3><p>Описание услуги 2</p><p>Цена: 2000 ₽</p></div>
-    <div class="service"><h3>Название услуги 3</h3><p>Описание услуги 3</p><p>Цена: 3000 ₽</p></div>
-    <div class="contact"><p>📞 Телефон: +7 999 123 45 67</p><p>📧 Email: moya@pochta.ru</p></div>
+
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            ProZvon
+            <span>professional voice solutions</span>
+        </div>
+        <div class="tagline">⚡ Дешёвые и качественные обзвоны для CR:MP / SA:MP проектов ⚡</div>
+    </div>
+
+    <div class="category">
+        <div class="category-title">▸ АДМИНИСТРАЦИЯ</div>
+    </div>
+    <div class="service">
+        <h3>Обзвон на пост администратора Black Russia</h3>
+        <p>Полное прохождение собеседования. Гарантия успеха.</p>
+        <div class="price">99 ₽</div>
+    </div>
+    <div class="service">
+        <h3>Обзвон на пост заместителя куратора / куратора Black Russia</h3>
+        <p>Проход в кураторский состав с гарантией.</p>
+        <div class="price">399 ₽</div>
+    </div>
+
+    <div class="category">
+        <div class="category-title">▸ ЛИДЕРЫ И САРШИЙ СОСТАВ</div>
+    </div>
+    <div class="service">
+        <h3>Обзвон на пост лидера ГОСС/ОПГ Black Russia</h3>
+        <p>Поможем занять лидерскую позицию.</p>
+        <div class="price">99 ₽</div>
+    </div>
+    <div class="service">
+        <h3>Обзвон на пост СС ГОСС/ОПГ Black Russia</h3>
+        <p>Проход в Старший Состав.</p>
+        <div class="price">67 ₽</div>
+    </div>
+
+    <div class="category">
+        <div class="category-title">▸ АГЕНТ ПОДДЕРЖКА И ТЕХ</div>
+    </div>
+    <div class="service">
+        <h3>Обзвон на пост агента службы поддержки Black Russia</h3>
+        <p>Успешное прохождение вступительного интервью.</p>
+        <div class="price">59 ₽</div>
+    </div>
+    <div class="service">
+        <h3>Обзвон на пост  технического специалиста Black Russia</h3>
+        <p>Помощь в прохождении обзвона на технического специалиста.</p>
+        <div class="price">199 ₽</div>
+    </div>
+
+    <div class="category">
+        <div class="category-title">▸ DISCORD</div>
+    </div>
+    <div class="service">
+        <h3>Обзвон на пост модератора Discord Black Russia</h3>
+        <p>Поможем пройти отбор в модерацию Discord-сервера.</p>
+        <div class="price">67 ₽</div>
+    </div>
+
+    <div class="category">
+        <div class="category-title">▸ ДОПОЛНИТЕЛЬНО</div>
+    </div>
+    <div class="service">
+        <h3>Изменение личных данных</h3>
+        <p>Безопасная смена данных.</p>
+        <div class="price">67 ₽</div>
+    </div>
+
+    <div class="contact">
+        <h3>📞 СВЯЗЬ С ProZvon</h3>
+        
+        <div class="contact-item">
+            <span class="label">📱 ВКонтакте:</span>
+            <a href="https://vk.com/club239353201" target="_blank" class="vk-link">Перейти в сообщество →</a>
+        </div>
+        
+        <div class="contact-item">
+            <span class="label">💳 Оплата:</span>
+            <div class="payment-info">
+                💳 Принимаем оплату по банковской карте РФ и криптовалюте<br>
+                🗣️ Реквизиты отправим в личные сообщения после согласования
+            </div>
+        </div>
+        
+        <div class="contact-item" style="margin-top: 20px;">
+            <span style="color: #475569; font-size: 0.85em;">✅ Связь в течение 5 минут</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 ProZvon — Анонимно. Качественно. Быстро.
+    </div>
+</div>
+
 </body>
 </html>
